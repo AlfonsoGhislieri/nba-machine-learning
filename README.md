@@ -15,24 +15,24 @@ It was chosen because it provides a large amount of player performance statistic
 
 ## Pre-processing
 
-**1.1** Removing data outside of modern era
+**1)** Removing data outside of modern era
 The first step was removing any data for players from any season before 2012-2013.
 
-**1.2** Column legibility
+**2)** Column legibility
 All columns that included _per_100_poss were shortened to just include the relevant statistic. For example: blk_per_100_poss was shortened to just blk. All columns that included _percent had the word replaced with a % sign.
 
-**1.3** Unreliable data
+**3)** Unreliable data
 The next step was to remove players that had unreliable data or missing data due to them not having played enough games or minutes during a season. 
 Dropped players that played less than 30 games, out of the maximum 82.
 Dropped players that played less than 1⁄4 of the possible game time for the season (984 min). 
 
-**1.4** Irrelevant features
+**4)** Irrelevant features
 Firstly, all features that were not performance statistics were dropped as these are not relevant for the scope of this research. This includes features like: player_id, player, team (tm), positions (pos), age and season. Secondly, games (g), games started (gs) and minutes played (mp) were also dropped as they do not give insight into the role of a player on the court, but simply if the player is a starter or not.
 
-**1.5** Null values
+**5)** Null values
 110 data points missing values for x3p%, these were players that simply took no 3 point shots, and the Null values were replaced with 0.
 
-**1.6** Scaling and dimension reduction
+**6)** Scaling and dimension reduction
 All the data was then scaled between 0 and 1. This was done since the range of values of many of the features was different. Thus, scaling was used to reduce variance and distance between the various data points, in order to avoid any one feature having more impact simply because the scale was broader.
 
 Finally, PCA was used to reduce the dimensions. This was done before clustering in order to both improve the performance of the clustering algorithms and reduce any noise. The number of dimensions chosen was 13, keeping the first 13 components still captured around 99% of the variability in the data.
@@ -69,5 +69,23 @@ While every cluster had one position that made up a larger percentage of the tot
 
 The means of all the features were calculated for each different cluster and saved in a new data frame. These values were then compared in order to better understand which performance statistics differentiated each cluster. The results of the analysis can be seen in the table below.
 
+![image](https://user-images.githubusercontent.com/652368/233581945-642a29ee-e708-4198-ac45-45cdc8003099.png)
 
+By looking at the different statistics for each cluster it became apparent that they had certain strengths and weaknesses. This allowed new positions to be created based on these differences. For example, when looking at cluster 4 versus cluster 5 they both had similar numbers of blocks, rebounds and personal fouls. What separated cluster 4 was that these players scored a lot more points, more assists and also took 5 times more 3 point shots compared to cluster 5. Similarly, cluster 0 stood out in most offensive categories, cluster 1 had impressive 3 point shot numbers and cluster 6 numbers were below others in most categories.
 
+## Conclusion
+
+### Limitations and potential improvements
+The biggest limitation of this research was that the clusters that were produced were not well separated, lots of data points were very close and overlapped. While this highlights the versatility of players in the modern era of the NBA, it is also likely that many data points may have been assigned to the wrong clusters or not all clusters were correctly identified. The results could have been improved by not having each player just be classified to one cluster, but 2 or 3 different ones. Additionally, GMM may have also provided more accurate results than K-means if the data set would have been normalised instead of being scaled.
+
+Moreover, it also suggests that the data set was a limitation. Basketball is an extremely complicated sport and the performance statistics that were used fail to cover every aspect of the game. Player tracking data, introduced in 2013, provides much more detailed and sophisticated performance metrics, with cameras used to track players (Lemire, 2023). Using tracking data would be a significant improvement, allowing for more performance statistics to be used, which could result in more clusters being accurately identified.
+
+### Achievements
+Nevertheless, the results did successfully prove the hypothesis that the newly created clusters would be made up of a variety of different positions as can be seen in Table 3. This is very valuable as it truly highlights how the traditional positions are no longer a valid way of classifying NBA player positions, and reinforces the argument that they need to be redefined as a whole. 
+
+Moreover, this research was successful in creating 7 new distinct positions, which can be used to more accurately classify players compared to the 5 traditional positions which are still being used. A prime example is NBA legend LeBron James, who over the last 10 years has been classified differently: PG, SF and PF. However, he was always assigned to the All-Round Superstar cluster. While he may have officially been changing positions during different seasons his actual role on the court remained the same. All-star PG Ben Simmons is another case of a player being completely misclassified by the traditional positions. He was classified as a Superstar Big which makes much more sense than PG. He is a uniquely physically dominant player who gets lots of rebounds and blocks, while also being a playmaker. 
+
+Ultimately, this research is valuable as it has provided a new way of looking at basketball positions which teams can use to better understand how to build or improve their rosters. When looking at the dominant years of the Golden State Warriors, 2014-2018, where they won 3 finals in 4 seasons, we can see a consistency in the composition of the starting lineup. In the three years they won, the starting lineup was always made up of: two All-Round Superstar and one Traditional Big. These were supported by two other roles: Facilitator or Versatile Forward, and Role-Player or 3 Point Specialist. The one season where they lost the NBA Finals, 2015-2016, the team only had one All-Round Superstar in the starting lineup. Therefore, the use of these new positions can also hold an important role in the creation of well balanced and successful NBA teams.
+
+### Possible extensions
+It would be very interesting to extend this research to other basketball leagues such as the EuroLeague, Spanish Liga ACB and the Greek HEBA A1 in order to compare the results with the ones created from the NBA data.  
