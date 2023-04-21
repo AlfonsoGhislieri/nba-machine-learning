@@ -41,5 +41,33 @@ Finally, PCA was used to reduce the dimensions. This was done before clustering 
 
 Next K-means and GMM were selected as the two algorithms that would be used, it was necessary to determine the optimal number of clusters for each. This was done using the silhouette and elbow method.
 
+![image](https://user-images.githubusercontent.com/652368/233579960-dffb4aed-9338-4b50-96f3-b14bca068aa7.png)
+
+![image](https://user-images.githubusercontent.com/652368/233580033-300788bc-0a59-43c8-a187-96cf2f42a4fd.png)
+
+Only using 2 or 3 clusters would be extremely limiting to the creation of any new significant NBA positions. So for K-means 7 was selected as the optimal number of clusters (score at 7 is very similar to that of 4), while for GMM only 4 (there is no good choice after that).
+
+## Comparing Models
+
+Testing the learning accuracy of both algorithms was not possible as these are unsupervised algorithms. However, by reducing the dimensions of the dataset to just 2 features using PCA the clusters were plotted in 2D in order to compare the results of both models visually.
+
+![image](https://user-images.githubusercontent.com/652368/233580777-ac738018-1b2d-4e15-be11-d32d275e050a.png)
+
+When comparing the results of both clustering models it is apparent that the divisions between the clusters are different. The GMM clusters have a lot more overlap, with the clusters not being as clearly divided, while K-means clusters are more well defined. A limitation of K-means is that it assigns a data point to the cluster with the nearest centroid, without accounting for uncertainty like GMM. Consequently, data points that are in between 2 clusters may have been misclassified. On the other hand, GMM clustering is based on probability which accounts for overlap, so data points in between clusters can be assumed to have been more accurately assigned. Moreover, the K-means clusters are limited to being spherical, while GMM cluster shapes are more flexible (Sharma, 2023). Therefore, in theory the GMM model should have produced more accurate results than K-means. Yet, K-means seems to have produced results that are more interesting for further analysis. 
+
+It is important to note that during preprocessing the data was scaled rather than normalised. This process affected the range but not the actual shape of the data, and may have impacted GMM’s ability to correctly identify clusters. Since GMM uses Gaussian Distribution to determine the probability that a data point belongs to a cluster, without normalisation, it is likely that GMM was not able to fit the data accurately (Sharma, 2023). Therefore, the results from the K-means model were chosen for further analysis as they are most likely to have actually produced the most accurate clusters. 
+
+## Results
+
+In order to better understand each of the clusters that was produced by the K-means model, the number of traditional positions that were present in each cluster was analysed and then tabulated below.
+
+![image](https://user-images.githubusercontent.com/652368/233581595-0702f08a-941b-4bda-9d39-08a893a159a8.png)
+
+While every cluster had one position that made up a larger percentage of the total population, a significant spread of the traditional NBA positions can be seen across the different clusters. Clusters 0, 1 and 6 stand out as having a larger spread of different positions. Whereas clusters 2, 4 and 5 have a higher concentration of just two positions.
+
+## Defining new NBA positions
+
+The means of all the features were calculated for each different cluster and saved in a new data frame. These values were then compared in order to better understand which performance statistics differentiated each cluster. The results of the analysis can be seen in the table below.
+
 
 
